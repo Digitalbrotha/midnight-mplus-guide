@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight M+ - Visual Mechanics Guide | Ranged DPS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 3px solid #ffc107;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #ffc107;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        .nav-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #ffc107;
+            color: #0f3460;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .mechanics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .mechanic-box {
+            background: linear-gradient(135deg, #0f3460 0%, #1a4d7a 100%);
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 25px;
+            animation: slideIn 0.6s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .mechanic-title {
+            color: #ffc107;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .mechanic-description {
+            color: #d0d0d0;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            background: rgba(0,0,0,0.3);
+            margin: 15px 0;
+        }
+
+        .legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(255,193,7,0.1);
+            border-radius: 5px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+
+        .ranged-tip-box {
+            background: rgba(76, 175, 245, 0.2);
+            border-left: 4px solid #4caff5;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+            color: #4caff5;
+        }
+
+        .ranged-tip-box::before {
+            content: "🎯 ";
+            font-weight: bold;
+        }
+
+        .critical-mechanic {
+            border: 3px solid #ff6b6b !important;
+            background: linear-gradient(135deg, #4d2222 0%, #1a4d7a 100%) !important;
+        }
+
+        .critical-mechanic .mechanic-title {
+            color: #ff6b6b;
+        }
+
+        .critical-badge {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8em;
+            margin-bottom: 10px;
+        }
+
+        .tip-list {
+            list-style: none;
+            margin-top: 10px;
+        }
+
+        .tip-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #d0d0d0;
+        }
+
+        .tip-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .mechanics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Midnight M+ Visual Mechanics Guide</h1>
+            <p>Ranged DPS - Positioning & Movement Guides</p>
+            <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <a href="index.html" style="padding: 8px 15px; background: #ffc107; color: #0f3460; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 0.9em; transition: all 0.3s ease;" onmouseover="this.style.background='#ff6b6b'; this.style.color='white'" onmouseout="this.style.background='#ffc107'; this.style.color='#0f3460'">📋 Complete Guide</a>
+                <a href="visuals.html" style="padding: 8px 15px; background: #4caff5; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 0.9em; transition: all 0.3s ease;" onmouseover="this.style.background='#2196F3'" onmouseout="this.style.background='#4caff5'">🎨 Visual Diagrams</a>
+                <a href="cheatsheet.html" style="padding: 8px 15px; background: #27ae60; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 0.9em; transition: all 0.3s ease;" onmouseover="this.style.background='#229954'" onmouseout="this.style.background='#27ae60'">🗂️ Cheat Sheet</a>
+                <a href="README.md" style="padding: 8px 15px; background: #9c27b0; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 0.9em; transition: all 0.3s ease;" onmouseover="this.style.background='#7b1fa2'" onmouseout="this.style.background='#9c27b0'">📖 Guide Info</a>
+            </div>
+        </header>
+
+        <div class="mechanics-grid">
+            <!-- 1. Counter-Intuitive Light Beam -->
+            <div class="mechanic-box critical-mechanic">
+                <div class="critical-badge">⚠️ MOST COMMON MISTAKE</div>
+                <div class="mechanic-title">Ascendant Lord - Luminous Beam</div>
+                <div class="mechanic-description">
+                    The beam looks dangerous, but you MUST stand IN it. Standing outside causes massive damage.
+                    This is backwards from typical mechanics and causes most wipes.
+                </div>
+                <canvas id="beamCanvas"></canvas>
+                <div class="ranged-tip-box">
+                    Position INSIDE the beam path. This is counterintuitive but required. Coordinate with healer to ensure coverage.
+                </div>
+                <ul class="tip-list">
+                    <li>Memorize beam width and positioning angle</li>
+                    <li>Don't panic when standing in the visual effect</li>
+                    <li>Maintain damage uptime while in beam</li>
+                    <li>Call out beam phases to group</li>
+                </ul>
+            </div>
+
+            <!-- 2. Spread for Debuffs -->
+            <div class="mechanic-box">
+                <div class="mechanic-title">Static Charge (Windrunner Spire)</div>
+                <div class="mechanic-description">
+                    Debuff jumps between nearby players. Maintain 8+ yards from all group members.
+                </div>
+                <canvas id="spreadCanvas"></canvas>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ffc107;"></div>
+                        <span>You (Ranged DPS)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #27ae60;"></div>
+                        <span>Safe Distance</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #e74c3c;"></div>
+                        <span>Too Close</span>
+                    </div>
+                </div>
+                <div class="ranged-tip-box">
+                    Spread formation is critical. Use your range advantage to stay at maximum safe distance.
+                </div>
+            </div>
+
+            <!-- 3. Feather Storm Kiting -->
+            <div class="mechanic-box">
+                <div class="mechanic-title">Feather Storm (Windrunner Spire)</div>
+                <div class="mechanic-description">
+                    Ground AoE that travels across room. Maintain DPS while continuously moving. Stutter-step to keep uptime.
+                </div>
+                <canvas id="kiitngPatternCanvas"></canvas>
+                <div class="ranged-tip-box">
+                    Practice stutter-stepping: target stays visible while moving. This maintains DPS uptime during mechanics.
+                </div>
+                <ul class="tip-list">
+                    <li>Plan your movement path in advance</li>
+                    <li>Use pillars/obstacles for LOS and pathing</li>
+                    <li>Stutter-step rather than full sprint</li>
+                    <li>Maintain range from melee to avoid double mechanics</li>
+                </ul>
+            </div>
+
+            <!-- 4. Multi-Zone Splitting -->
+            <div class="mechanic-box">
+                <div class="mechanic-title">Inferno (Ambassador Flamelash)</div>
+                <div class="mechanic-description">
+                    Room splits into safe zones. Group must split efficiently. Know your assigned zone beforehand.
+                </div>
+                <canvas id="zoneCanvas"></canvas>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #27ae60;"></div>
+                        <span>Safe Zone</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #e74c3c;"></div>
+                        <span>Danger Zone</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ffc107;"></div>
+                        <span>Assigned Position</span>
+                    </div>
+                </div>
+                <div class="ranged-tip-box">
+                    Pre-assign zones before pull. Ranged should position to help split healer if needed. Route to zone efficiently.
+                </div>
+            </div>
+
+            <!-- 5. Knockback Management -->
+            <div class="mechanic-box">
+                <div class="mechanic-title">Void Nova & Knockbacks</div>
+                <div class="mechanic-description">
+                    Around-the-boss AoE with knockback. Ranged recover faster due to distance. Position near walls if possible.
+                </div>
+                <canvas id="knockbackCanvas"></canvas>
+                <div class="ranged-tip-box">
+                    Your range is an advantage here! You recover quicker and can get back to DPS faster than melee. Position strategically.
+                </div>
+                <ul class="tip-list">
+                    <li>Position 25+ yards away to take reduced knockback</li>
+                    <li>Have backs to wall if possible (prevents extra knockback)</li>
+                    <li>Ready your resume-DPS ability immediately after knockback</li>
+                    <li>Account for momentum when predicting landing zone</li>
+                </ul>
+            </div>
+
+            <!-- 6. Leap Attack -->
+            <div class="mechanic-box">
+                <div class="mechanic-title">Leap Attack (Cruelfang)</div>
+                <div class="mechanic-description">
+                    Boss jumps to random ranged player. Spread out. When targeted, run in predetermined direction.
+                </div>
+                <canvas id="leapCanvas"></canvas>
+                <div class="ranged-tip-box">
+                    This is YOUR responsibility to handle. Know your escape route before pull. Keep moving post-leap to avoid follow-up attacks.
+                </div>
+                <ul class="tip-list">
+                    <li>Assign escape routes per ranged player position</li>
+                    <li>Don't run toward healer or other mechanics</li>
+                    <li>Be spread minimum 8 yards apart</li>
+                    <li>Continue DPS immediately after leap resolves</li>
+                </ul>
+            </div>
+
+            <!-- 7. Frost Bolt Bouncing -->
+            <div class="mechanic-box critical-mechanic">
+                <div class="critical-badge">⚠️ POSITIONING CRITICAL</div>
+                <div class="mechanic-title">Frost Bolt (Selandria)</div>
+                <div class="mechanic-description">
+                    Spell bounces between nearby players. Max spread is essential. Spread reduces number of bounces dramatically.
+                </div>
+                <canvas id="bounceCanvas"></canvas>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #3498db;"></div>
+                        <span>Spell Bounce Path</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ffc107;"></div>
+                        <span>Player Position</span>
+                    </div>
+                </div>
+                <div class="ranged-tip-box">
+                    You have the advantage here! Use your 25+ yard range to stay spread. Prevents bounces from hitting group.
+                </div>
+            </div>
+
+            <!-- 8. Blizzard Room Coverage -->
+            <div class="mechanic-box">
+                <div class="mechanic-title">Blizzard (Selandria) - Pre-Positioning</div>
+                <div class="mechanic-description">
+                    Room fills with AoE hazard. Must pre-position in safe zones before cast starts. Can't escape once started.
+                </div>
+                <canvas id="blizzardCanvas"></canvas>
+                <div class="ranged-tip-box">
+                    Position in predetermined zones BEFORE boss casts. Watch for cast telegraph and move immediately to safe area.
+                </div>
+                <ul class="tip-list">
+                    <li>Learn safe zone locations beforehand</li>
+                    <li>Pre-position 3-5 seconds before expected cast</li>
+                    <li>Don't wait for visual confirmation of cast</li>
+                    <li>Coordinate safe zones with group to prevent congestion</li>
+                </ul>
+            </div>
+
+            <!-- 9. Stacking vs Spreading -->
+            <div class="mechanic-box">
+                <div class="mechanic-title">Understanding Stack vs Spread</div>
+                <div class="mechanic-description">
+                    Key tactical decision: When to stack for healing vs. when to spread for mechanic avoidance.
+                </div>
+                <canvas id="stackVsSpreadCanvas"></canvas>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #27ae60;"></div>
+                        <span>Stacking (AoE healable)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #e74c3c;"></div>
+                        <span>Spreading (debuff/jump)</span>
+                    </div>
+                </div>
+                <div class="ranged-tip-box">
+                    Listen for raid calls. Stack for AoE damage phases. Spread for debuff/jump mechanics. Balance positioning efficiency.
+                </div>
+            </div>
+
+            <!-- 10. Ranged Positioning Zone -->
+            <div class="mechanic-box">
+                <div class="mechanic-title">Optimal Ranged DPS Positioning</div>
+                <div class="mechanic-description">
+                    Safe zones that maximize DPS uptime while avoiding most mechanics. Adjust based on specific encounter.
+                </div>
+                <canvas id="rangedPositionCanvas"></canvas>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ffc107;"></div>
+                        <span>Optimal Ranged Zone</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #27ae60;"></div>
+                        <span>Secondary Option</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #e74c3c;"></div>
+                        <span>Avoid Zone</span>
+                    </div>
+                </div>
+                <div class="ranged-tip-box">
+                    Stay 25+ yards from boss, positioned to flank (not behind). Maintain LOS to healer. Be ready to move for mechanics.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Beam Canvas - Show IN vs OUT positioning
+        function drawBeamMechanic() {
+            const canvas = document.getElementById('beamCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 400;
+            canvas.height = 300;
+
+            // Background
+            ctx.fillStyle = '#0a0e27';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Boss
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.arc(200, 250, 20, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Boss', 200, 255);
+
+            // Light beam (yellow glow)
+            ctx.clearRect(150, 50, 100, 150);
+            ctx.fillStyle = 'rgba(255, 193, 7, 0.3)';
+            ctx.fillRect(150, 50, 100, 150);
+            ctx.strokeStyle = '#ffc107';
+            ctx.lineWidth = 3;
+            ctx.strokeRect(150, 50, 100, 150);
+
+            // Wrong position (outside beam - red X)
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.arc(100, 100, 12, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(95, 95);
+            ctx.lineTo(105, 105);
+            ctx.moveTo(105, 95);
+            ctx.lineTo(95, 105);
+            ctx.stroke();
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 10px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('WRONG', 100, 125);
+
+            // Correct position (inside beam - green checkmark)
+            ctx.fillStyle = '#27ae60';
+            ctx.beginPath();
+            ctx.arc(300, 100, 12, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(295, 100);
+            ctx.lineTo(298, 105);
+            ctx.lineTo(305, 95);
+            ctx.stroke();
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 10px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('CORRECT', 300, 125);
+
+            // Label
+            ctx.fillStyle = '#ffc107';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('STAND IN BEAM', 200, 25);
+        }
+
+        // 2. Spread Canvas
+        function drawSpreadFormation() {
+            const canvas = document.getElementById('spreadCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 400;
+            canvas.height = 400;
+
+            ctx.fillStyle = '#0a0e27';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Draw arena circle
+            ctx.strokeStyle = '#444';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(200, 200, 180, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Safe distance circles
+            const positions = [
+                {x: 100, y: 100, label: 'DPS1'},
+                {x: 300, y: 100, label: 'DPS2'},
+                {x: 100, y: 300, label: 'DPS3'},
+                {x: 300, y: 300, label: 'DPS4'},
+                {x: 200, y: 200, label: 'Tank'}
+            ];
+
+            positions.forEach(pos => {
+                if (pos.label === 'Tank') {
+                    ctx.fillStyle = '#e74c3c';
+                } else {
+                    ctx.fillStyle = '#ffc107';
+                }
+                
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 15, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Distance indicator
+                ctx.strokeStyle = 'rgba(39, 174, 96, 0.3)';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([5, 5]);
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 60, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Label
+                ctx.fillStyle = '#fff';
+                ctx.font = '10px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(pos.label, pos.x, pos.y + 30);
+            });
+
+            ctx.fillStyle = '#4caf f5';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('8+ Yards Spread', 200, 30);
+        }
+
+        // 3. Kiting Pattern
+        function drawKitingPattern() {
+            const canvas = document.getElementById('kiitngPatternCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 400;
+            canvas.height = 300;
+
+            ctx.fillStyle = '#0a0e27';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Boss position
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.arc(200, 250, 15, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Ground AoE moving path
+            ctx.fillStyle = 'rgba(255, 107, 107, 0.2)';
+            for (let i = 0; i < 5; i++) {
+                ctx.fillRect(150 + i * 40, 150 - i * 20, 40, 40);
+                ctx.strokeStyle = '#e74c3c';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(150 + i * 40, 150 - i * 20, 40, 40);
+            }
+
+            // Player kiting path
+            ctx.strokeStyle = '#ffc107';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.moveTo(100, 220);
+            ctx.quadraticCurveTo(150, 80, 300, 220);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Player positions
+            ctx.fillStyle = '#ffc107';
+            ctx.beginPath();
+            ctx.arc(100, 220, 8, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(300, 220, 8, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Arrow
+            ctx.fillStyle = '#ffc107';
+            ctx.font = '12px Arial';
+            ctx.fillText('→ Kite pattern', 120, 40);
+        }
+
+        // 4. Zone Splitting
+        function drawZoneSplitting() {
+            const canvas = document.getElementById('zoneCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 400;
+            canvas.height = 400;
+
+            ctx.fillStyle = '#0a0e27';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Boss
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.arc(200, 200, 15, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Safe zones
+            const zones = [
+                {x: 100, y: 100, color: '#27ae60'},
+                {x: 300, y: 100, color: '#27ae60'},
+                {x: 100, y: 300, color: '#27ae60'},
+                {x: 300, y: 300, color: '#27ae60'}
+            ];
+
+            zones.forEach(zone => {
+                ctx.fillStyle = zone.color;
+                ctx.globalAlpha = 0.2;
+                ctx.fillRect(zone.x - 50, zone.y - 50, 100, 100);
+                ctx.globalAlpha = 1;
+                ctx.strokeStyle = zone.color;
+                ctx.lineWidth = 2;
+                ctx.strokeRect(zone.x - 50, zone.y - 50, 100, 100);
+            });
+
+            // Labels
+            ctx.fillStyle = '#27ae60';
+            ctx.font = 'bold 10px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('SAFE', 100, 105);
+            ctx.fillText('SAFE', 300, 105);
+            ctx.fillText('SAFE', 100, 305);
+            ctx.fillText('SAFE', 300, 305);
+        }
+
+        // 5. Knockback
+        function drawKnockback() {
+            const canvas = document.getElementById('knockbackCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 400;
+            canvas.height = 300;
+
+            ctx.fillStyle = '#0a0e27';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Boss and AoE
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.arc(200, 200, 15, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.fillStyle = 'rgba(255, 107, 107, 0.3)';
+            ctx.beginPath();
+            ctx.arc(200, 200, 60, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Knockback vectors
+            const angles = [0, Math.PI/2, Math.PI, 3*Math.PI/2];
+            angles.forEach(angle => {
+                const startX = 200 + Math.cos(angle) * 65;
+                const startY = 200 + Math.sin(angle) * 65;
+                const endX = 200 + Math.cos(angle) * 100;
+                const endY = 200 + Math.sin(angle) * 100;
+
+                // Arrow
+                ctx.strokeStyle = '#ffc107';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+                ctx.lineTo(endX, endY);
+                ctx.stroke();
+
+                // Arrowhead
+                const headlen = 10;
+                const angle2 = Math.atan2(endY - startY, endX - startX);
+                ctx.beginPath();
+                ctx.moveTo(endX, endY);
+                ctx.lineTo(endX - headlen*Math.cos(angle2 - Math.PI/6), endY - headlen*Math.sin(angle2 - Math.PI/6));
+                ctx.lineTo(endX - headlen*Math.cos(angle2 + Math.PI/6), endY - headlen*Math.sin(angle2 + Math.PI/6));
+                ctx.closePath();
+                ctx.fillStyle = '#ffc107';
+                ctx.fill();
+            });
+
+            ctx.fillStyle = '#ffc107';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Knockback Directions', 200, 30);
+        }
+
+        // 6. Leap Attack
+        function drawLeapAttack() {
+            const canvas = document.getElementById('leapCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 400;
+            canvas.height = 400;
+
+            ctx.fillStyle = '#0a0e27';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Arena
+            ctx.strokeStyle = '#444';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(200, 200, 150, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Boss start
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.arc(200, 200, 12, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Ranged positions
+            const positions = [
+                {x: 80, y: 80},
+                {x: 320, y: 80},
+                {x: 80, y: 320},
+                {x: 320, y: 320}
+            ];
+
+            positions.forEach((pos, idx) => {
+                // Player
+                ctx.fillStyle = '#ffc107';
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 10, 0, Math.PI * 2);
+                ctx.fill();
+
+                // Escape route
+                ctx.strokeStyle = 'rgba(76, 175, 245, 0.5)';
+                ctx.lineWidth = 1;
+                ctx.setLineDash([3, 3]);
+                const angle = Math.atan2(pos.y - 200, pos.x - 200);
+                const endX = pos.x + Math.cos(angle) * 50;
+                const endY = pos.y + Math.sin(angle) * 50;
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y);
+                ctx.lineTo(endX, endY);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                // Label
+                ctx.fillStyle = '#fff';
+                ctx.font = '9px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(`P${idx+1}`, pos.x, pos.y + 3);
+            });
+
+            ctx.fillStyle = '#ffc107';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Spread + Know Escape Route', 200, 30);
+        }
+
+        // 7. Bounce Pattern
+        function drawBouncePattern() {
+            const canvas = document.getElementById('bounceCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 400;
+            canvas.height = 400;
+
+            ctx.fillStyle = '#0a0e27';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Grouped (bad)
+            ctx.fillStyle = '#666';
+            ctx.font = '10px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('GROUPED (BAD)', 100, 20);
+
+            // Players grouped - bounces everywhere
+            const groupedPos = [{x: 70, y: 60}, {x: 90, y: 60}, {x: 80, y: 75}];
+            groupedPos.forEach(pos => {
+                ctx.fillStyle = '#e74c3c';
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 6, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Bounce effects
+            ctx.strokeStyle = 'rgba(255, 107, 107, 0.6)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([2, 2]);
+            ctx.beginPath();
+            ctx.moveTo(70, 60);
+            ctx.lineTo(90, 60);
+            ctx.lineTo(80, 75);
+            ctx.lineTo(70, 60);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Spread (good)
+            ctx.fillStyle = '#666';
+            ctx.font = '10px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('SPREAD (GOOD)', 300, 20);
+
+            // Players spread - minimal bounces
+            const spreadPos = [{x: 250, y: 60}, {x: 350, y: 60}, {x: 300, y: 100}];
+            spreadPos.forEach(pos => {
+                ctx.fillStyle = '#27ae60';
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 6, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // One bounce only
+            ctx.strokeStyle = 'rgba(52, 211, 153, 0.6)';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([2, 2]);
+            ctx.beginPath();
+            ctx.moveTo(250, 60);
+            ctx.lineTo(350, 60);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Boss and spell source
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.arc(150, 200, 12, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 10px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Boss', 150, 205);
+
+            // Title
+            ctx.fillStyle = '#ffc107';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Spread Reduces Bounces', 200, 350);
+        }
+
+        // 8. Blizzard Zones
+        function drawBlizzardZones() {
+            const canvas = document.getElementById('blizzardCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 400;
+            canvas.height = 300;
+
+            ctx.fillStyle = '#0a0e27';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Blizzard hazard
+            ctx.fillStyle = 'rgba(100, 150, 255, 0.3)';
+            ctx.fillRect(0, 100, 400, 100);
+
+            // Safe lanes
+            ctx.fillStyle = 'rgba(39, 174, 96, 0.2)';
+            ctx.fillRect(0, 50, 80, 50);
+            ctx.fillRect(160, 50, 80, 50);
+            ctx.fillRect(320, 50, 80, 50);
+            ctx.fillRect(0, 200, 80, 50);
+            ctx.fillRect(160, 200, 80, 50);
+            ctx.fillRect(320, 200, 80, 50);
+
+            ctx.strokeStyle = '#27ae60';
+            ctx.lineWidth = 2;
+            ctx.strokeRect(0, 50, 80, 50);
+            ctx.strokeRect(160, 50, 80, 50);
+            ctx.strokeRect(320, 50, 80, 50);
+            ctx.strokeRect(0, 200, 80, 50);
+            ctx.strokeRect(160, 200, 80, 50);
+            ctx.strokeRect(320, 200, 80, 50);
+
+            // Labels
+            ctx.fillStyle = '#ffc107';
+            ctx.font = 'bold 10px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('SAFE', 40, 80);
+            ctx.fillText('SAFE', 200, 80);
+            ctx.fillText('SAFE', 360, 80);
+            ctx.fillText('SAFE', 40, 230);
+            ctx.fillText('SAFE', 200, 230);
+            ctx.fillText('SAFE', 360, 230);
+
+            ctx.fillStyle = '#3498db';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('BLIZZARD', 200, 150);
+        }
+
+        // 9. Stack vs Spread
+        function drawStackVsSpread() {
+            const canvas = document.getElementById('stackVsSpreadCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 400;
+            canvas.height = 300;
+
+            ctx.fillStyle = '#0a0e27';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Stack side
+            ctx.fillStyle = '#27ae60';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('STACK (AoE Phase)', 100, 25);
+
+            const stackPos = [
+                {x: 80, y: 60}, {x: 100, y: 60}, {x: 90, y: 75},
+                {x: 85, y: 85}, {x: 105, y: 85}
+            ];
+            stackPos.forEach(pos => {
+                ctx.fillStyle = '#27ae60';
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 5, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // AoE heal
+            ctx.strokeStyle = 'rgba(39, 174, 96, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(92, 72, 30, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Spread side
+            ctx.fillStyle = '#e74c3c';
+            ctx.font = 'bold 12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('SPREAD (Debuff Phase)', 300, 25);
+
+            const spreadPos = [
+                {x: 250, y: 60}, {x: 350, y: 60}, {x: 250, y: 100},
+                {x: 350, y: 100}
+            ];
+            spreadPos.forEach(pos => {
+                ctx.fillStyle = '#e74c3c';
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 5, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // No jumps
+            ctx.strokeStyle = 'rgba(231, 107, 107, 0.5)';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([3, 3]);
+            ctx.beginPath();
+            ctx.arc(300, 80, 60, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            // Descriptions
+            ctx.fillStyle = '#d0d0d0';
+            ctx.font = 'bold 10px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Healer covers everyone', 100, 130);
+            ctx.fillText('with AoE', 100, 143);
+
+            ctx.fillText('Debuffs don\'t', 300, 130);
+            ctx.fillText('spread to neighbors', 300, 143);
+        }
+
+        // 10. Optimal Ranged Position
+        function drawRangedPosition() {
+            const canvas = document.getElementById('rangedPositionCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = 400;
+            canvas.height = 400;
+
+            ctx.fillStyle = '#0a0e27';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Arena circle
+            ctx.strokeStyle = '#444';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(200, 200, 150, 0, Math.PI * 2);
+            ctx.stroke();
+
+            // Boss
+            ctx.fillStyle = '#e74c3c';
+            ctx.beginPath();
+            ctx.arc(200, 200, 12, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Melee zone (avoid)
+            ctx.fillStyle = 'rgba(231, 107, 107, 0.1)';
+            ctx.beginPath();
+            ctx.arc(200, 200, 50, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Safe ranged zone
+            ctx.fillStyle = 'rgba(255, 193, 7, 0.15)';
+            ctx.beginPath();
+            ctx.arc(200, 200, 120, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(200, 200, 50, 0, Math.PI * 2);
+            ctx.fill(true);
+
+            // Optimal positions (flanking)
+            const positions = [
+                {x: 320, y: 200, label: 'OPTIMAL'},
+                {x: 80, y: 200, label: 'OPTIMAL'},
+                {x: 200, y: 80, label: 'AVOID'},
+                {x: 200, y: 320, label: 'GOOD'}
+            ];
+
+            positions.forEach(pos => {
+                if (pos.label === 'OPTIMAL') {
+                    ctx.fillStyle = '#ffc107';
+                } else if (pos.label === 'AVOID') {
+                    ctx.fillStyle = '#e74c3c';
+                } else {
+                    ctx.fillStyle = '#27ae60';
+                }
+
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 8, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = pos.label === 'OPTIMAL' ? '#ffc107' : pos.label === 'AVOID' ? '#e74c3c' : '#27ae60';
+                ctx.font = 'bold 9px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(pos.label, pos.x, pos.y + 20);
+            });
+
+            // Range indicator
+            ctx.strokeStyle = 'rgba(255, 193, 7, 0.3)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([5, 5]);
+            ctx.beginPath();
+            ctx.arc(200, 200, 40, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.setLineDash([]);
+
+            ctx.fillStyle = '#ffc107';
+            ctx.font = 'bold 10px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Min 25 yards', 200, 30);
+        }
+
+        // Run all drawing functions
+        drawBeamMechanic();
+        drawSpreadFormation();
+        drawKitingPattern();
+        drawZoneSplitting();
+        drawKnockback();
+        drawLeapAttack();
+        drawBouncePattern();
+        drawBlizzardZones();
+        drawStackVsSpread();
+        drawRangedPosition();
+    </script>
+</body>
+</html>

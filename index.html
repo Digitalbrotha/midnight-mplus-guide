@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight Season 1 M+ Mechanics Guide - Ranged DPS</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 0;
+            border-bottom: 3px solid #ffc107;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #ffc107;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+        }
+
+        header p {
+            color: #b0b0b0;
+            font-size: 1.1em;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255,193,7,0.3);
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            color: #ffc107;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        select {
+            padding: 12px;
+            background: #0f3460;
+            color: #e0e0e0;
+            border: 2px solid #ffc107;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        select:hover,
+        select:focus {
+            background: #1a4d7a;
+            box-shadow: 0 0 10px rgba(255,193,7,0.5);
+            outline: none;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .reset-btn {
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .reset-btn:hover {
+            background: #c0392b;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .boss-card {
+            background: linear-gradient(135deg, #0f3460 0%, #1a4d7a 100%);
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .boss-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(255,193,7,0.3);
+            border-color: #ff6b6b;
+        }
+
+        .dungeon-badge {
+            display: inline-block;
+            background: #ffc107;
+            color: #0f3460;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8em;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .boss-name {
+            font-size: 1.8em;
+            color: #ffc107;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .difficulty {
+            display: inline-block;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+        }
+
+        .difficulty.high {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .difficulty.medium {
+            background: #f39c12;
+            color: white;
+        }
+
+        .difficulty.low {
+            background: #27ae60;
+            color: white;
+        }
+
+        .mechanic {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-left: 4px solid #ffc107;
+            border-radius: 5px;
+        }
+
+        .mechanic-name {
+            color: #ffc107;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .mechanic-description {
+            color: #d0d0d0;
+            margin-bottom: 10px;
+        }
+
+        .ranged-tip {
+            background: rgba(76, 175, 245, 0.2);
+            border: 1px solid #4caf f5;
+            padding: 10px;
+            border-radius: 5px;
+            color: #4caff5;
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+
+        .ranged-tip::before {
+            content: "🎯 ";
+            font-weight: bold;
+        }
+
+        .visual-element {
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .mechanic-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            flex: 1;
+            min-width: 80px;
+            padding: 10px;
+            background: rgba(255,193,7,0.1);
+            border: 1px solid #ffc107;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        .stat-label {
+            color: #999;
+            font-size: 0.8em;
+        }
+
+        .stat-value {
+            color: #ffc107;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .featured-warning {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, #c0392b 0%, #e74c3c 100%);
+            border: 2px solid #ff6b6b;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .featured-warning h2 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .featured-warning p {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .featured-warning ul {
+            margin-left: 20px;
+            color: #fff;
+        }
+
+        .featured-warning li {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .controls {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .search-box {
+            padding: 12px;
+            background: #0f3460;
+            color: #e0e0e0;
+            border: 2px solid #ffc107;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .search-box::placeholder {
+            color: #666;
+        }
+
+        .search-box:focus {
+            background: #1a4d7a;
+            box-shadow: 0 0 10px rgba(255,193,7,0.5);
+            outline: none;
+        }
+
+        .stats-section {
+            grid-column: 1 / -1;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,193,7,0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+
+        .stats-section h2 {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Midnight Season 1 M+ Mechanics Guide</h1>
+            <p>Ranged DPS Focus - Boss Mechanics & Strategies</p>
+            <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                <a href="index.html" style="padding: 10px 20px; background: #ffc107; color: #0f3460; text-decoration: none; border-radius: 5px; font-weight: bold; transition: all 0.3s ease;" onmouseover="this.style.background='#ff6b6b'; this.style.color='white'" onmouseout="this.style.background='#ffc107'; this.style.color='#0f3460'">📋 Complete Guide</a>
+                <a href="visuals.html" style="padding: 10px 20px; background: #4caf f5; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; transition: all 0.3s ease;" onmouseover="this.style.background='#2196F3'" onmouseout="this.style.background='#4caff5'">🎨 Visual Diagrams</a>
+                <a href="cheatsheet.html" style="padding: 10px 20px; background: #27ae60; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; transition: all 0.3s ease;" onmouseover="this.style.background='#229954'" onmouseout="this.style.background='#27ae60'">🗂️ Cheat Sheet</a>
+                <a href="README.md" style="padding: 10px 20px; background: #9c27b0; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; transition: all 0.3s ease;" onmouseover="this.style.background='#7b1fa2'" onmouseout="this.style.background='#9c27b0'">📖 Guide Info</a>
+            </div>
+        </header>
+
+        <div class="controls">
+            <div class="control-group">
+                <label for="dungeonFilter">Filter by Dungeon:</label>
+                <select id="dungeonFilter">
+                    <option value="">All Dungeons</option>
+                    <option value="Windrunner Spire">Windrunner Spire</option>
+                    <option value="Nexus-Point Xenas">Nexus-Point Xenas</option>
+                    <option value="Seat of the Triumvirate">Seat of the Triumvirate</option>
+                    <option value="Pit of Saron">Pit of Saron</option>
+                    <option value="Algeth'ar Academy">Algeth'ar Academy</option>
+                    <option value="Skyreach">Skyreach</option>
+                    <option value="Maisara Caverns">Maisara Caverns</option>
+                    <option value="Magisters' Terrace">Magisters' Terrace</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="difficultyFilter">Filter by Difficulty:</label>
+                <select id="difficultyFilter">
+                    <option value="">All Difficulties</option>
+                    <option value="high">High Difficulty</option>
+                    <option value="medium">Medium Difficulty</option>
+                    <option value="low">Low Difficulty</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="searchBox">Search Boss Name:</label>
+                <input type="text" id="searchBox" class="search-box" placeholder="Type boss name...">
+            </div>
+
+            <div class="control-group">
+                <label>&nbsp;</label>
+                <button class="reset-btn" onclick="resetFilters()">Reset All Filters</button>
+            </div>
+        </div>
+
+        <div id="statsSection" class="stats-section" style="display: none;">
+            <h2>📊 Results Summary</h2>
+            <div class="stats-grid">
+                <div class="stat">
+                    <div class="stat-label">Total Bosses</div>
+                    <div class="stat-value" id="totalBosses">0</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">High Difficulty</div>
+                    <div class="stat-value" id="highCount">0</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Medium Difficulty</div>
+                    <div class="stat-value" id="mediumCount">0</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Low Difficulty</div>
+                    <div class="stat-value" id="lowCount">0</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Total Mechanics</div>
+                    <div class="stat-value" id="totalMechanics">0</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content" class="content">
+            <!-- Boss cards will be populated here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        const dungeonData = [
+            {
+                dungeon: "Windrunner Spire",
+                boss: "Talon King Ikiss",
+                difficulty: "high",
+                mechanics: [
+                    {
+                        name: "Arcane Explosion",
+                        description: "Circular AoE around boss that deals massive damage. Avoid standing in melee range during casts.",
+                        rangedTip: "Maintain 25+ yards distance during casts. Position behind pillars if available."
+                    },
+                    {
+                        name: "Static Charge",
+                        description: "Debuff that jumps between nearby players dealing damage. Stand spread from group members.",
+                        rangedTip: "Maintain 8+ yards from all other players. This is a primary positioning mechanic for ranged."
+                    },
+                    {
+                        name: "Feather Storm",
+                        description: "Boss channels ground AoE that travels across the room. Must kite and move constantly.",
+                        rangedTip: "Maintain optimal DPS positioning while continuously moving. Practice stutter-stepping to keep uptime."
+                    }
+                ]
+            },
+            {
+                dungeon: "Windrunner Spire",
+                boss: "Vexilus",
+                difficulty: "medium",
+                mechanics: [
+                    {
+                        name: "Arcane Barrage",
+                        description: "Multi-hit spell cast at random player. Tank should keep boss front-facing to minimize scatter.",
+                        rangedTip: "Keep maximum range to avoid extra hits. Don't be the target if possible."
+                    },
+                    {
+                        name: "Dimensional Shift",
+                        description: "Boss phases out, creating moving mirror images that explode.",
+                        rangedTip: "Use this downtime to reposition. Stay away from predicted explosion zones."
+                    }
+                ]
+            },
+            {
+                dungeon: "Windrunner Spire",
+                boss: "Ambassador Flamelash",
+                difficulty: "high",
+                mechanics: [
+                    {
+                        name: "Pyroclastic Wave",
+                        description: "Wave of fire that travels from boss outward, dealing heavy damage.",
+                        rangedTip: "Run perpendicular to wave direction. Communicate with group to avoid blocking healer's escape route."
+                    },
+                    {
+                        name: "Ignite Flesh",
+                        description: "Debuff that increases fire damage taken. Dispel priority target.",
+                        rangedTip: "Flag dispel targets for your healer. If you get this, move away from group slightly."
+                    },
+                    {
+                        name: "Inferno",
+                        description: "Large AoE that forces group to split to multiple zones.",
+                        rangedTip: "Pre-position before cast. Know which zone you'll move to. Maintain DPS uptime by moving efficiently."
+                    }
+                ]
+            },
+            {
+                dungeon: "Nexus-Point Xenas",
+                boss: "Forgemaster Morrigan",
+                difficulty: "medium",
+                mechanics: [
+                    {
+                        name: "Molten Core",
+                        description: "Single target debuff creating damaging zone under player.",
+                        rangedTip: "Move to designated kiting zones away from group. Don't drag zones through healer position."
+                    },
+                    {
+                        name: "Hammer Strike",
+                        description: "Melee attack on current target, auto-targets tank.",
+                        rangedTip: "Maintain safest possible distance. Focus on damage while avoiding ground effects."
+                    }
+                ]
+            },
+            {
+                dungeon: "Nexus-Point Xenas",
+                boss: "Ascendant Lord Orifex",
+                difficulty: "high",
+                mechanics: [
+                    {
+                        name: "Luminous Beam (Counter-intuitive!)",
+                        description: "DANGEROUS MECHANIC: Boss creates light beams. You MUST stand IN the beam to take reduced damage. Standing outside beam causes massive spike damage.",
+                        rangedTip: "This is the most common mechanics mistake. Position IN the beam. Yes, it looks dangerous but it's required. Plan positioning beforehand."
+                    },
+                    {
+                        name: "Ascendant Eruption",
+                        description: "Multiple stacking debuffs that increase damage taken. Must dispel or reset.",
+                        rangedTip: "Track stack count mentally. Prepare to move away for cleanse if you reach 4+ stacks."
+                    },
+                    {
+                        name: "Void Nova",
+                        description: "Around the boss AoE with knockback effect.",
+                        rangedTip: "Be ready for knockback. Use range to recover faster. Consider positioning near walls."
+                    }
+                ]
+            },
+            {
+                dungeon: "Nexus-Point Xenas",
+                boss: "Manifest Warden",
+                difficulty: "medium",
+                mechanics: [
+                    {
+                        name: "Copied Strike",
+                        description: "Boss copies last ability used by players and casts it.",
+                        rangedTip: "Be aware of what you've cast recently. The boss will replicate it on group."
+                    },
+                    {
+                        name: "Guardian Shade",
+                        description: "Duplicating minions spawn that must be destroyed.",
+                        rangedTip: "Cleave these adds while maintaining boss DPS. Position to hit adds and boss simultaneously."
+                    }
+                ]
+            },
+            {
+                dungeon: "Seat of the Triumvirate",
+                boss: "Zuraal the Ascended",
+                difficulty: "high",
+                mechanics: [
+                    {
+                        name: "Void Eruption",
+                        description: "Conal AoE in front of boss, large damage zone.",
+                        rangedTip: "Position behind or to the side of boss. Never stand in front during cast."
+                    },
+                    {
+                        name: "Twilight Nexus",
+                        description: "Debuff that creates traveling void zones following the player.",
+                        rangedTip: "Run in wide circles away from group. Don't lead zones toward healer or distant players."
+                    },
+                    {
+                        name: "Portal Summon",
+                        description: "Spawns adds that must be prioritized. Group must quickly switch targets.",
+                        rangedTip: "Have quick targeting ready. Use markers to identify priority adds. Switch efficiently."
+                    }
+                ]
+            },
+            {
+                dungeon: "Seat of the Triumvirate",
+                boss: "Viceroy Nezhar",
+                difficulty: "medium",
+                mechanics: [
+                    {
+                        name: "Debilitating Hex",
+                        description: "Single target debuff reducing healing received.",
+                        rangedTip: "Communicate to healer if you receive this. Plan cooldn around reduced healing."
+                    },
+                    {
+                        name: "Void Lane",
+                        description: "Linear AoE attack across arena.",
+                        rangedTip: "Maintain situational awareness. Move perpendicular to approaching lanes."
+                    }
+                ]
+            },
+            {
+                dungeon: "Seat of the Triumvirate",
+                boss: "Triumvirate Leaders",
+                difficulty: "high",
+                mechanics: [
+                    {
+                        name: "Composite Authority",
+                        description: "Multiple bosses with independent abilities. Requires multi-phase coordination.",
+                        rangedTip: "Assign cleave targets early. Don't tunnel one target; help group with damage spread."
+                    },
+                    {
+                        name: "Cascading Power",
+                        description: "Each boss gains stacking buffs as fight progresses.",
+                        rangedTip: "Understand DPS priority rotation. Focus on highest priority target based on buff count."
+                    }
+                ]
+            },
+            {
+                dungeon: "Pit of Saron",
+                boss: "Forgemistress Garona",
+                difficulty: "medium",
+                mechanics: [
+                    {
+                        name: "Flame Jet",
+                        description: "Directional fire stream from boss.",
+                        rangedTip: "Move to safe angles. Don't stand directly in front or back of boss during cast."
+                    },
+                    {
+                        name: "Magma Pool",
+                        description: "Spawns lava zones that damage standing in them.",
+                        rangedTip: "Track pool count. Ensure you have escape routes available."
+                    }
+                ]
+            },
+            {
+                dungeon: "Pit of Saron",
+                boss: "Cruelfang",
+                difficulty: "high",
+                mechanics: [
+                    {
+                        name: "Rending Bite",
+                        description: "Strong attack on current target creating stacking bleed.",
+                        rangedTip: "Not a threat to ranged. Range safety is your advantage here."
+                    },
+                    {
+                        name: "Primal Shout",
+                        description: "AoE fear effect that affects entire group.",
+                        rangedTip: "Pre-position away from edges/hazards. Fear can cause wipes if you run into dangers."
+                    },
+                    {
+                        name: "Leap Attack",
+                        description: "Boss jumps to random ranged player location.",
+                        rangedTip: "Be spread out. When targeted, run in predetermined direction. Keep moving post-leap."
+                    }
+                ]
+            },
+            {
+                dungeon: "Pit of Saron",
+                boss: "Overseer Kuulnor",
+                difficulty: "low",
+                mechanics: [
+                    {
+                        name: "Whip Strike",
+                        description: "Melee attack with moderate damage.",
+                        rangedTip: "Stand at range. Positioning mechanic is minimal here."
+                    },
+                    {
+                        name: "Empowerment Aura",
+                        description: "Boss buffs adds with temporary strength boost.",
+                        rangedTip: "Help burn empowered adds quickly. Coordinate burst with group."
+                    }
+                ]
+            },
+            {
+                dungeon: "Algeth'ar Academy",
+                boss: "Headmaster Tharrisa",
+                difficulty: "medium",
+                mechanics: [
+                    {
+                        name: "Arcane Amplification",
+                        description: "Group-wide debuff increasing magic damage taken.",
+                        rangedTip: "Stack slightly closer than normal for healing efficiency when this is active."
+                    },
+                    {
+                        name: "Spellburst",
+                        description: "Casted ability that damages random players.",
+                        rangedTip: "Spread out to minimize multi-target hits. Even spread positioning is ideal."
+                    }
+                ]
+            },
+            {
+                dungeon: "Algeth'ar Academy",
+                boss: "Veras the Ascendant",
+                difficulty: "high",
+                mechanics: [
+                    {
+                        name: "Ascendant Form",
+                        description: "Boss enters powered state requiring special strategy to damage.",
+                        rangedTip: "Understand phase mechanic beforehand. Coordinate raid CDs for burn phases."
+                    },
+                    {
+                        name: "Seeping Void",
+                        description: "Ground AoE zones that persist and spread.",
+                        rangedTip: "Create clean zones for group. Predict spread pattern and move ahead of it."
+                    }
+                ]
+            },
+            {
+                dungeon: "Skyreach",
+                boss: "Chirp Master Orendil",
+                difficulty: "low",
+                mechanics: [
+                    {
+                        name: "Bird Strike",
+                        description: "Attack with minor damage.",
+                        rangedTip: "Straightforward encounter. Focus on positioning for AoE avoidance."
+                    },
+                    {
+                        name: "Feather Volley",
+                        description: "Weak AoE around boss.",
+                        rangedTip: "Keep standard range. Minimal positioning challenge."
+                    }
+                ]
+            },
+            {
+                dungeon: "Skyreach",
+                boss: "Wind Master Sentrak",
+                difficulty: "medium",
+                mechanics: [
+                    {
+                        name: "Gust of Wind",
+                        description: "Knockback effect that can push into hazards.",
+                        rangedTip: "Position away from edges before cast. Use range to recover from knockback."
+                    },
+                    {
+                        name: "Air Current",
+                        description: "Moving area that affects group positioning.",
+                        rangedTip: "Pre-position before mechanics. Anticipate patterns."
+                    }
+                ]
+            },
+            {
+                dungeon: "Maisara Caverns",
+                boss: "Glinting Serpent",
+                difficulty: "low",
+                mechanics: [
+                    {
+                        name: "Coil Strike",
+                        description: "Melee-range attack.",
+                        rangedTip: "Maintain distance. Standard positioning applies."
+                    }
+                ]
+            },
+            {
+                dungeon: "Maisara Caverns",
+                boss: "Scaled Guardian",
+                difficulty: "medium",
+                mechanics: [
+                    {
+                        name: "Petrifying Gaze",
+                        description: "Stun effect if looking at boss during cast.",
+                        rangedTip: "Turn away during casts. Communicate stun timing to group for coordination."
+                    },
+                    {
+                        name: "Tail Pound",
+                        description: "AoE around back of boss.",
+                        rangedTip: "Position frontally. Don't stand behind boss during cast animation."
+                    }
+                ]
+            },
+            {
+                dungeon: "Magisters' Terrace",
+                boss: "Magister Raelyn",
+                difficulty: "medium",
+                mechanics: [
+                    {
+                        name: "Magical Missile",
+                        description: "Projectile attack at random target.",
+                        rangedTip: "Keep moving to dodge. Can't be LoSed completely so maintain awareness."
+                    },
+                    {
+                        name: "Spell Ward",
+                        description: "Shields boss from magic effects.",
+                        rangedTip: "Switch to physical if available or maintain damage through shield."
+                    }
+                ]
+            },
+            {
+                dungeon: "Magisters' Terrace",
+                boss: "Selandria",
+                difficulty: "high",
+                mechanics: [
+                    {
+                        name: "Frost Bolt",
+                        description: "Chained spell that bounces between nearby players causing slows.",
+                        rangedTip: "Spread out to prevent bounces. Position at maximum range from group."
+                    },
+                    {
+                        name: "Icy Vengeance",
+                        description: "Retaliatory spell when boss takes burst damage.",
+                        rangedTip: "Don't force burst phases. Coordinate steady damage to avoid icy pushback."
+                    },
+                    {
+                        name: "Blizzard",
+                        description: "Group-wide AoE that fills entire room with hazard.",
+                        rangedTip: "Pre-position in safe zones before cast. Can't escape mid-AoE once cast starts."
+                    }
+                ]
+            }
+        ];
+
+        function renderCards(filterDungeon = "", filterDifficulty = "", searchTerm = "") {
+            const content = document.getElementById('content');
+            const statsSection = document.getElementById('statsSection');
+            
+            const filtered = dungeonData.filter(boss => {
+                const matchDungeon = filterDungeon === "" || boss.dungeon === filterDungeon;
+                const matchDifficulty = filterDifficulty === "" || boss.difficulty === filterDifficulty;
+                const matchSearch = searchTerm === "" || boss.boss.toLowerCase().includes(searchTerm.toLowerCase());
+                return matchDungeon && matchDifficulty && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                content.innerHTML = `
+                    <div class="empty-state">
+                        <h2>No bosses found</h2>
+                        <p>Try adjusting your filters</p>
+                    </div>
+                `;
+                statsSection.style.display = 'none';
+                return;
+            }
+
+            // Calculate stats
+            const highCount = filtered.filter(b => b.difficulty === 'high').length;
+            const mediumCount = filtered.filter(b => b.difficulty === 'medium').length;
+            const lowCount = filtered.filter(b => b.difficulty === 'low').length;
+            const totalMechanics = filtered.reduce((sum, b) => sum + b.mechanics.length, 0);
+
+            document.getElementById('totalBosses').textContent = filtered.length;
+            document.getElementById('highCount').textContent = highCount;
+            document.getElementById('mediumCount').textContent = mediumCount;
+            document.getElementById('lowCount').textContent = lowCount;
+            document.getElementById('totalMechanics').textContent = totalMechanics;
+            statsSection.style.display = 'block';
+
+            const cards = filtered.map(boss => `
+                <div class="boss-card">
+                    <div class="dungeon-badge">${boss.dungeon}</div>
+                    <div class="boss-name">${boss.boss}</div>
+                    <div class="difficulty ${boss.difficulty}">${boss.difficulty.toUpperCase()} DIFFICULTY</div>
+                    ${boss.mechanics.map(mech => `
+                        <div class="mechanic">
+                            <div class="mechanic-name">⚡ ${mech.name}</div>
+                            <div class="mechanic-description">${mech.description}</div>
+                            <div class="ranged-tip">${mech.rangedTip}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `).join('');
+
+            content.innerHTML = cards;
+        }
+
+        function resetFilters() {
+            document.getElementById('dungeonFilter').value = '';
+            document.getElementById('difficultyFilter').value = '';
+            document.getElementById('searchBox').value = '';
+            renderCards();
+        }
+
+        // Event listeners
+        document.getElementById('dungeonFilter').addEventListener('change', () => {
+            const dungeon = document.getElementById('dungeonFilter').value;
+            const difficulty = document.getElementById('difficultyFilter').value;
+            const search = document.getElementById('searchBox').value;
+            renderCards(dungeon, difficulty, search);
+        });
+
+        document.getElementById('difficultyFilter').addEventListener('change', () => {
+            const dungeon = document.getElementById('dungeonFilter').value;
+            const difficulty = document.getElementById('difficultyFilter').value;
+            const search = document.getElementById('searchBox').value;
+            renderCards(dungeon, difficulty, search);
+        });
+
+        document.getElementById('searchBox').addEventListener('input', (e) => {
+            const dungeon = document.getElementById('dungeonFilter').value;
+            const difficulty = document.getElementById('difficultyFilter').value;
+            renderCards(dungeon, difficulty, e.target.value);
+        });
+
+        // Initial render
+        renderCards();
+    </script>
+</body>
+</html>

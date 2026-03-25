@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnight M+ Quick Reference - Ranged DPS Cheat Sheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: white;
+            color: #333;
+            line-height: 1.4;
+            padding: 20px;
+        }
+
+        .sheet {
+            max-width: 8.5in;
+            height: 11in;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            page-break-after: always;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+            .sheet {
+                box-shadow: none;
+                margin: 0;
+                page-break-after: always;
+            }
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #ffc107;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            font-size: 1.8em;
+            color: #0f3460;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            flex: 1;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .section {
+            background: #f5f5f5;
+            border-left: 4px solid #ffc107;
+            padding: 10px;
+            font-size: 0.85em;
+        }
+
+        .section-title {
+            font-weight: bold;
+            color: #0f3460;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        .section-content {
+            font-size: 0.8em;
+            line-height: 1.3;
+        }
+
+        .highlight {
+            background: #ffe0b2;
+            padding: 2px 4px;
+            font-weight: bold;
+            border-radius: 2px;
+        }
+
+        .critical {
+            background: #ffcdd2;
+            border-left-color: #e74c3c;
+            border-left-width: 6px;
+        }
+
+        ul, ol {
+            margin-left: 15px;
+            font-size: 0.8em;
+        }
+
+        li {
+            margin: 2px 0;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.75em;
+            margin-top: 5px;
+        }
+
+        .table th {
+            background: #0f3460;
+            color: white;
+            padding: 3px;
+            text-align: left;
+        }
+
+        .table td {
+            border: 1px solid #ddd;
+            padding: 3px;
+        }
+
+        .table tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+
+        .footer {
+            border-top: 1px solid #ddd;
+            padding-top: 5px;
+            margin-top: 10px;
+            font-size: 0.75em;
+            color: #999;
+            text-align: right;
+        }
+
+        .dungeon-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+            font-size: 0.75em;
+        }
+
+        .dungeon-item {
+            background: #fff3e0;
+            padding: 3px 5px;
+            border-radius: 3px;
+            border-left: 2px solid #ffc107;
+        }
+
+        .three-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 5px;
+        }
+
+        .mechanic-card {
+            background: #e3f2fd;
+            padding: 5px;
+            border-radius: 3px;
+            border: 1px solid #90caf9;
+            font-size: 0.75em;
+        }
+
+        .mechanic-card strong {
+            color: #1565c0;
+        }
+
+        .tips {
+            background: #f3e5f5;
+            padding: 5px;
+            border-left: 3px solid #9c27b0;
+            font-size: 0.75em;
+            line-height: 1.2;
+        }
+
+        strong {
+            color: #0f3460;
+        }
+
+        .page2 {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page 1 -->
+    <div class="sheet">
+        <div class="header">
+            <h1>🎯 Midnight M+ Quick Reference</h1>
+            <p>Ranged DPS Cheat Sheet | All 8 Dungeons</p>
+        </div>
+
+        <div class="columns">
+            <!-- Column 1 -->
+            <div class="column">
+                <!-- Positioning Fundamentals -->
+                <div class="section">
+                    <div class="section-title">🎯 Positioning Fundamentals</div>
+                    <div class="section-content">
+                        <ul>
+                            <li><strong>Distance:</strong> 25+ yards from boss</li>
+                            <li><strong>Positioning:</strong> Flank (90°) or back (180°)</li>
+                            <li><strong>Spread:</strong> 8+ yards from other DPS</li>
+                            <li><strong>Optimal:</strong> Where you can see adds + healer</li>
+                            <li><strong>Never:</strong> Stand in front of boss</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Critical Mechanics -->
+                <div class="section critical">
+                    <div class="section-title">⚠️ Most Common Wipes</div>
+                    <div class="section-content">
+                        <ul>
+                            <li><strong>Luminous Beam:</strong> STAND IN BEAM (not outside!)</li>
+                            <li><strong>Static Charge:</strong> 8+ yard spread mandatory</li>
+                            <li><strong>Frost Bolt:</strong> Max spread to prevent bounces</li>
+                            <li><strong>Blizzard:</strong> Pre-position BEFORE cast</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Quick Mechanic Types -->
+                <div class="section">
+                    <div class="section-title">⚡ Mechanic Types</div>
+                    <div class="section-content">
+                        <table class="table">
+                            <tr><th>Type</th><th>Action</th></tr>
+                            <tr><td>Spread</td><td>8+ yards apart</td></tr>
+                            <tr><td>Stack</td><td>Group together</td></tr>
+                            <tr><td>Kite</td><td>Stutter-step away</td></tr>
+                            <tr><td>Dodge</td><td>Move perpendicular</td></tr>
+                            <tr><td>KB</td><td>Recover quickly</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Dungeon Difficulty -->
+                <div class="section">
+                    <div class="section-title">📊 Dungeons by Difficulty</div>
+                    <div class="dungeon-list">
+                        <div><strong style="color: #e74c3c;">HIGH:</strong></div>
+                        <div>Windrunner, Nexus, Seat, Magisters</div>
+                        <div><strong style="color: #f39c12;">MED:</strong></div>
+                        <div>Pit of Saron, Algeth'ar</div>
+                        <div><strong style="color: #27ae60;">LOW:</strong></div>
+                        <div>Skyreach, Maisara</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="column">
+                <!-- Ranged DPS Advantages -->
+                <div class="section">
+                    <div class="section-title">✨ Your Advantages</div>
+                    <div class="section-content">
+                        <ul>
+                            <li>Max reaction time (25+ yards)</li>
+                            <li>No melee cleave damage</li>
+                            <li>Can spread easily</li>
+                            <li>See entire arena</li>
+                            <li>Faster KB recovery</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Stutter-Step Guide -->
+                <div class="section">
+                    <div class="section-title">🚶 Stutter-Stepping</div>
+                    <div class="section-content">
+                        <strong>Why:</strong> Maintain DPS during movement<br/>
+                        <strong>How:</strong>
+                        <ol>
+                            <li>Press move key (0.1-0.2 sec)</li>
+                            <li>Release key</li>
+                            <li>Attack once</li>
+                            <li>Repeat</li>
+                        </ol>
+                        <strong>Practice:</strong> Dummy training
+                    </div>
+                </div>
+
+                <!-- Debuff Tracking -->
+                <div class="section">
+                    <div class="section-title">📍 Debuff Management</div>
+                    <div class="section-content">
+                        <ul>
+                            <li>Track your debuff stack count</li>
+                            <li>Call out at 4+ stacks</li>
+                            <li>Move away for cleanse</li>
+                            <li>Plan spread before debuff</li>
+                            <li>Use arena geometry to escape</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Boss Phase Management -->
+                <div class="section">
+                    <div class="section-title">🔄 Phase Management</div>
+                    <div class="section-content">
+                        <ul>
+                            <li><strong>High Damage:</strong> Play safe, maintain DPS</li>
+                            <li><strong>Add Phase:</strong> Switch to priority immediately</li>
+                            <li><strong>Transition:</strong> Prepare for next phase</li>
+                            <li><strong>Burst Window:</strong> Coordinate group CDs</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Quick Calls to Make -->
+                <div class="section">
+                    <div class="section-title">📢 What To Callout</div>
+                    <div class="section-content">
+                        <ul>
+                            <li>"Spread" when debuff incoming</li>
+                            <li>Debuff count when 4+ stacks</li>
+                            <li>Add locations as they spawn</li>
+                            <li>Mechanic names as you see them</li>
+                            <li>"Watch [mechanic]" for new players</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Emergency Callouts -->
+                <div class="section critical">
+                    <div class="section-title">🚨 Emergency Callouts</div>
+                    <div class="section-content">
+                        <ul>
+                            <li>"SPREAD NOW" - debuff incoming</li>
+                            <li>"STOP DPS" - burst will trigger bad</li>
+                            <li>"TANK NEEDS HELP" - clear adds</li>
+                            <li>"REPOSITION" - change zones</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            March 2026 | Midnight Season 1 | Print for Reference
+        </div>
+    </div>
+
+    <!-- Page 2 -->
+    <div class="sheet page2">
+        <div class="header">
+            <h1>🎯 Midnight M+ Mechanics Reference</h1>
+            <p>Boss-by-Boss Quick Guide | Page 2</p>
+        </div>
+
+        <div class="columns">
+            <!-- Column 1 -->
+            <div class="column">
+                <!-- Windrunner Spire -->
+                <div class="section">
+                    <div class="section-title">⛈️ Windrunner Spire</div>
+                    <div class="section-content">
+                        <div class="mechanic-card">
+                            <strong>Talon King Ikiss</strong><br/>
+                            • Arcane Explosion: 25+ yards<br/>
+                            • Static Charge: 8+ spread<br/>
+                            • Feather Storm: Stutter-step / kite
+                        </div>
+                        <div class="mechanic-card" style="margin-top: 3px;">
+                            <strong>Vexilus</strong><br/>
+                            • Arcane Barrage: Max range<br/>
+                            • Dimensional Shift: Reposition
+                        </div>
+                        <div class="mechanic-card" style="margin-top: 3px;">
+                            <strong>Ambassador Flamelash</strong><br/>
+                            • Pyroclastic Wave: Move perpendicular<br/>
+                            • Ignite Flesh: Healer dispel<br/>
+                            • Inferno: Assigned zones
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Nexus-Point -->
+                <div class="section">
+                    <div class="section-title">💫 Nexus-Point Xenas</div>
+                    <div class="section-content">
+                        <div class="mechanic-card">
+                            <strong>Forgemaster Morrigan</strong><br/>
+                            • Molten Core: Kite away<br/>
+                            • Hammer Strike: Stay at range
+                        </div>
+                        <div class="mechanic-card" style="margin-top: 3px;">
+                            <strong>Ascendant Lord Orifex</strong><br/>
+                            • 🚨 Luminous Beam: STAND IN!<br/>
+                            • Ascendant Eruption: Track stacks<br/>
+                            • Void Nova: Spread pre-KB
+                        </div>
+                        <div class="mechanic-card" style="margin-top: 3px;">
+                            <strong>Manifest Warden</strong><br/>
+                            • Copied Strike: Awareness<br/>
+                            • Guardian Shade: Cleave adds
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seat of Triumvirate -->
+                <div class="section">
+                    <div class="section-title">👑 Seat of Triumvirate</div>
+                    <div class="section-content">
+                        <div class="mechanic-card">
+                            <strong>Zuraal the Ascended</strong><br/>
+                            • Void Eruption: Side of boss<br/>
+                            • Twilight Nexus: Wide circles<br/>
+                            • Portal Summon: Burn adds
+                        </div>
+                        <div class="mechanic-card" style="margin-top: 3px;">
+                            <strong>Viceroy Nezhar</strong><br/>
+                            • Debilitating Hex: Call it out<br/>
+                            • Void Lane: Dodge perpendicular
+                        </div>
+                        <div class="mechanic-card" style="margin-top: 3px;">
+                            <strong>Triumvirate Leaders</strong><br/>
+                            • Multi-target: Assign targets<br/>
+                            • Cascading Power: DPS priority
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 2 -->
+            <div class="column">
+                <!-- Pit of Saron -->
+                <div class="section">
+                    <div class="section-title">⛏️ Pit of Saron</div>
+                    <div class="section-content">
+                        <div class="mechanic-card">
+                            <strong>Forgemistress Garona</strong><br/>
+                            • Flame Jet: Safe angles<br/>
+                            • Magma Pool: Avoid zones
+                        </div>
+                        <div class="mechanic-card" style="margin-top: 3px;">
+                            <strong>Cruelfang</strong><br/>
+                            • 🎯 Leap Attack: Know escape<br/>
+                            • Primal Shout: Fear + position<br/>
+                            • Rending Bite: Range advantage
+                        </div>
+                        <div class="mechanic-card" style="margin-top: 3px;">
+                            <strong>Overseer Kuulnor</strong><br/>
+                            • Whip Strike: Standard range<br/>
+                            • Empowerment Aura: Burst adds
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Dungeons -->
+                <div class="section">
+                    <div class="section-title">📚 Other Dungeons</div>
+                    <div class="section-content">
+                        <div class="mechanic-card">
+                            <strong>Algeth'ar Academy</strong><br/>
+                            • Arcane Amplification: Stack<br/>
+                            • Ascendant Form: Phase management<br/>
+                            • Seeping Void: Create clean zones
+                        </div>
+                        <div class="mechanic-card" style="margin-top: 3px;">
+                            <strong>Magisters' Terrace</strong><br/>
+                            • Magical Missile: Keep moving<br/>
+                            • 🚨 Frost Bolt: MAX SPREAD<br/>
+                            • 🚨 Blizzard: PRE-POSITION
+                        </div>
+                        <div class="mechanic-card" style="margin-top: 3px;">
+                            <strong>Skyreach</strong><br/>
+                            • Gust of Wind: No edges<br/>
+                            • Air Current: Anticipate
+                        </div>
+                        <div class="mechanic-card" style="margin-top: 3px;">
+                            <strong>Maisara Caverns</strong><br/>
+                            • Petrifying Gaze: Turn away<br/>
+                            • Tail Pound: Position front
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Success Tips -->
+                <div class="section">
+                    <div class="section-title">🏆 Success Tips</div>
+                    <div class="tips">
+                        ✓ Learn fight before pulling<br/>
+                        ✓ Communicate mechanics<br/>
+                        ✓ Position optimally<br/>
+                        ✓ Master stutter-stepping<br/>
+                        ✓ Track debuffs<br/>
+                        ✓ Help group succeed<br/>
+                        ✓ Admit mistakes quickly<br/>
+                        ✓ Stay positive
+                    </div>
+                </div>
+
+                <!-- Practice Checklist -->
+                <div class="section">
+                    <div class="section-title">✅ Pre-Run Checklist</div>
+                    <div class="tips">
+                        □ Know all boss names<br/>
+                        □ Learn key mechanics<br/>
+                        □ Check visual diagrams<br/>
+                        □ Plan positioning spots<br/>
+                        □ Decide spread zones<br/>
+                        □ Identify escape routes<br/>
+                        □ Ready keybinds<br/>
+                        □ Tell group your role
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            March 2026 | Midnight Season 1 | Reference Sheet Complete
+        </div>
+    </div>
+</body>
+</html>
