@@ -439,123 +439,249 @@
 
     <script>
         const dungeonData = [
+            // WINDRUNNER SPIRE - 4 BOSSES
             {
                 dungeon: "Windrunner Spire",
-                boss: "Talon King Ikiss",
+                boss: "Emberdawn",
                 difficulty: "high",
                 mechanics: [
                     {
-                        name: "Arcane Explosion",
-                        description: "Circular AoE around boss that deals massive damage. Avoid standing in melee range during casts.",
-                        rangedTip: "Maintain 25+ yards distance during casts. Position behind pillars if available."
+                        name: "Infernal Blaze",
+                        description: "Boss channels area that erupts in flames dealing massive damage. Spreads outward from center.",
+                        rangedTip: "Maintain 25+ yards during cast animations. Move perpendicular to spread if possible."
                     },
                     {
-                        name: "Static Charge",
-                        description: "Debuff that jumps between nearby players dealing damage. Stand spread from group members.",
-                        rangedTip: "Maintain 8+ yards from all other players. This is a primary positioning mechanic for ranged."
-                    },
-                    {
-                        name: "Feather Storm",
-                        description: "Boss channels ground AoE that travels across the room. Must kite and move constantly.",
-                        rangedTip: "Maintain optimal DPS positioning while continuously moving. Practice stutter-stepping to keep uptime."
+                        name: "Scorching Pillar",
+                        description: "Summons fire pillars that damage standing nearby. Multiple pillars spawn throughout arena.",
+                        rangedTip: "Predict pillar spawn locations and kite around them. Mark safe zones beforehand."
                     }
                 ]
             },
             {
                 dungeon: "Windrunner Spire",
-                boss: "Vexilus",
+                boss: "Kalis",
+                difficulty: "medium",
+                mechanics: [
+                    {
+                        name: "Void Fracture",
+                        description: "Casts debuff on random player creating spreading void damage zone.",
+                        rangedTip: "Move away from group immediately when targeted. Kite in circle pattern away from healer."
+                    },
+                    {
+                        name: "Ethereal Phase",
+                        description: "Boss becomes immune and teleports around room.",
+                        rangedTip: "Use downtime to reposition to safe zones. Prepare for burst phase exit."
+                    }
+                ]
+            },
+            {
+                dungeon: "Windrunner Spire",
+                boss: "Commander Kroluk",
+                difficulty: "high",
+                mechanics: [
+                    {
+                        name: "Tactical Strike",
+                        description: "Boss marks ranged targets with debuff before executing high damage ability.",
+                        rangedTip: "Spread out to 15+ yards. Use LoS if available as soon as debuff applied."
+                    },
+                    {
+                        name: "Legion Call",
+                        description: "Summons warrior adds that charge at random players with powerful attacks.",
+                        rangedTip: "Burn adds quickly with group. Create kiting path away from healer standing position."
+                    }
+                ]
+            },
+            {
+                dungeon: "Windrunner Spire",
+                boss: "Restless Heart",
+                difficulty: "medium",
+                mechanics: [
+                    {
+                        name: "Pulse Shockwave",
+                        description: "Boss pulses energy outward in waves at regular intervals.",
+                        rangedTip: "Jump or strafe perpendicular to wave direction. Don't face boss during pulses."
+                    },
+                    {
+                        name: "Soul Drain",
+                        description: "Channels beam at random players reducing healing effectiveness.",
+                        rangedTip: "Move out of beam sight lines immediately. Alert healer if you're targeted."
+                    }
+                ]
+            },
+            // MAGISTER'S TERRACE - 4 BOSSES
+            {
+                dungeon: "Magisters' Terrace",
+                boss: "Arcanotron Custos",
                 difficulty: "medium",
                 mechanics: [
                     {
                         name: "Arcane Barrage",
-                        description: "Multi-hit spell cast at random player. Tank should keep boss front-facing to minimize scatter.",
-                        rangedTip: "Keep maximum range to avoid extra hits. Don't be the target if possible."
+                        description: "Rapid fire arcane projectiles at all ranged targets dealing escalating damage.",
+                        rangedTip: "Keep moving constantly to dodge projectiles. Don't stand still during casts."
                     },
                     {
-                        name: "Dimensional Shift",
-                        description: "Boss phases out, creating moving mirror images that explode.",
-                        rangedTip: "Use this downtime to reposition. Stay away from predicted explosion zones."
+                        name: "Mana Drain",
+                        description: "Tethered beam that siphons mana from affected players.",
+                        rangedTip: "Break line of sight behind pillars. Move perpendicular to healer if tethered."
                     }
                 ]
             },
             {
-                dungeon: "Windrunner Spire",
-                boss: "Ambassador Flamelash",
+                dungeon: "Magisters' Terrace",
+                boss: "Seranel Sunlash",
                 difficulty: "high",
                 mechanics: [
                     {
-                        name: "Pyroclastic Wave",
-                        description: "Wave of fire that travels from boss outward, dealing heavy damage.",
-                        rangedTip: "Run perpendicular to wave direction. Communicate with group to avoid blocking healer's escape route."
+                        name: "Shadow Whip",
+                        description: "Boss swings whip in conal area dealing heavy damage and creating ground hazard.",
+                        rangedTip: "Position behind boss or far to sides. Never stand in front quarter of arena."
                     },
                     {
-                        name: "Ignite Flesh",
-                        description: "Debuff that increases fire damage taken. Dispel priority target.",
-                        rangedTip: "Flag dispel targets for your healer. If you get this, move away from group slightly."
-                    },
-                    {
-                        name: "Inferno",
-                        description: "Large AoE that forces group to split to multiple zones.",
-                        rangedTip: "Pre-position before cast. Know which zone you'll move to. Maintain DPS uptime by moving efficiently."
+                        name: "Darkness Bloom",
+                        description: "Spawns dark zones that explode after delay, applying slow effect.",
+                        rangedTip: "Track bloom spawns and move away from predicted explosion zones before they bloom."
                     }
                 ]
             },
             {
-                dungeon: "Nexus-Point Xenas",
-                boss: "Forgemaster Morrigan",
+                dungeon: "Magisters' Terrace",
+                boss: "Gemellus",
                 difficulty: "medium",
                 mechanics: [
                     {
-                        name: "Molten Core",
-                        description: "Single target debuff creating damaging zone under player.",
-                        rangedTip: "Move to designated kiting zones away from group. Don't drag zones through healer position."
+                        name: "Split Form",
+                        description: "Boss duplicates into two weaker forms requiring damage split between targets.",
+                        rangedTip: "Alternate damage between clones. Avoid focusing one target or mechanics get dangerously harder."
                     },
                     {
-                        name: "Hammer Strike",
-                        description: "Melee attack on current target, auto-targets tank.",
-                        rangedTip: "Maintain safest possible distance. Focus on damage while avoiding ground effects."
+                        name: "Synchronized Beam",
+                        description: "Each clone fires beam at separate targets simultaneously.",
+                        rangedTip: "Dodge both beams by moving in zig-zag pattern. Don't let beams cross group paths."
                     }
                 ]
             },
             {
-                dungeon: "Nexus-Point Xenas",
-                boss: "Ascendant Lord Orifex",
+                dungeon: "Magisters' Terrace",
+                boss: "Degentrius",
                 difficulty: "high",
                 mechanics: [
                     {
-                        name: "Luminous Beam (Counter-intuitive!)",
-                        description: "DANGEROUS MECHANIC: Boss creates light beams. You MUST stand IN the beam to take reduced damage. Standing outside beam causes massive spike damage.",
-                        rangedTip: "This is the most common mechanics mistake. Position IN the beam. Yes, it looks dangerous but it's required. Plan positioning beforehand."
+                        name: "Void Rift",
+                        description: "Creates tear in space at player location that pulls in nearby enemies.",
+                        rangedTip: "Move away from group immediately when rift starts forming. Kite away from rift."
                     },
                     {
-                        name: "Ascendant Eruption",
-                        description: "Multiple stacking debuffs that increase damage taken. Must dispel or reset.",
-                        rangedTip: "Track stack count mentally. Prepare to move away for cleanse if you reach 4+ stacks."
+                        name: "Spectral Torment",
+                        description: "Applies stacking damage-over-time debuff that increases in severity per stack.",
+                        rangedTip: "Find safe moment to dispel or reset stacks. Plan cooldown usage around stack timings."
+                    }
+                ]
+            },
+            // NEXUS-POINT XENAS - 3 BOSSES
+            {
+                dungeon: "Nexus-Point Xenas",
+                boss: "Kasreth",
+                difficulty: "high",
+                mechanics: [
+                    {
+                        name: "Void Rupture",
+                        description: "Erupts void energy that damages all players and creates hostile ground zones.",
+                        rangedTip: "Spread out before cast. Move to clean zones immediately after eruption."
                     },
                     {
-                        name: "Void Nova",
-                        description: "Around the boss AoE with knockback effect.",
-                        rangedTip: "Be ready for knockback. Use range to recover faster. Consider positioning near walls."
+                        name: "Entangling Corruption",
+                        description: "Tethers players with chains that stun if too far apart.",
+                        rangedTip: "Stay with tethered partner but maintain damage positioning. Communicate positions beforehand."
                     }
                 ]
             },
             {
                 dungeon: "Nexus-Point Xenas",
-                boss: "Manifest Warden",
+                boss: "Corewarden Nysarra",
                 difficulty: "medium",
                 mechanics: [
                     {
-                        name: "Copied Strike",
-                        description: "Boss copies last ability used by players and casts it.",
-                        rangedTip: "Be aware of what you've cast recently. The boss will replicate it on group."
+                        name: "Earthen Spike",
+                        description: "Spike erupts from ground underneath random player dealing massive physical damage.",
+                        rangedTip: "Stand on markers and move to new safe zones every few seconds. Anticipate next spike location."
                     },
                     {
-                        name: "Guardian Shade",
-                        description: "Duplicating minions spawn that must be destroyed.",
-                        rangedTip: "Cleave these adds while maintaining boss DPS. Position to hit adds and boss simultaneously."
+                        name: "Crystalline Shield",
+                        description: "Boss gains protective barrier that reflects damage back at attackers.",
+                        rangedTip: "Stop attacking during shield. Use downtime to move to optimal positioning."
                     }
                 ]
             },
+            {
+                dungeon: "Nexus-Point Xenas",
+                boss: "Lothraxion",
+                difficulty: "high",
+                mechanics: [
+                    {
+                        name: "Void Bolt",
+                        description: "Rapid fire void projectiles at all ranged players from multiple angles.",
+                        rangedTip: "Keep maximum distance and strafe constantly. Predict projectile paths and sidestep."
+                    },
+                    {
+                        name: "Reality Tear",
+                        description: "Opens dimension that pulls random players inside inflicting shadow damage.",
+                        rangedTip: "Escape tear quickly by moving toward edge. Throw defensive cooldowns when inside."
+                    }
+                ]
+            },
+            // MAISARA CAVERNS - 3 BOSSES
+            {
+                dungeon: "Maisara Caverns",
+                boss: "Muro'jin",
+                difficulty: "medium",
+                mechanics: [
+                    {
+                        name: "Tidal Wave",
+                        description: "Summons wave of water that travels across arena pushing players backward.",
+                        rangedTip: "Position against wall if possible to mitigate knockback. Use knockback-reducing cooldowns."
+                    },
+                    {
+                        name: "Aqueous Binding",
+                        description: "Creates sphere around player that slows movement and applies freeze debuff.",
+                        rangedTip: "Break free of sphere by moving out quickly or use displacement ability."
+                    }
+                ]
+            },
+            {
+                dungeon: "Maisara Caverns",
+                boss: "Vordaza",
+                difficulty: "high",
+                mechanics: [
+                    {
+                        name: "Void Siphon",
+                        description: "Pulls all players toward boss center while dealing shadow damage.",
+                        rangedTip: "Run away from boss immediately. Stack with group for healer efficiency."
+                    },
+                    {
+                        name: "Corrupted Echo",
+                        description: "Duplicates last ability cast by each player and fires it back at them.",
+                        rangedTip: "Be aware of recent ability usage. Don't spam high-damage abilities before echo."
+                    }
+                ]
+            },
+            {
+                dungeon: "Maisara Caverns",
+                boss: "Rak'tul",
+                difficulty: "low",
+                mechanics: [
+                    {
+                        name: "Primal Strike",
+                        description: "Heavy melee attack on current target with moderate damage.",
+                        rangedTip: "Maintain 20+ yards distance. Straightforward positioning encounter."
+                    },
+                    {
+                        name: "Ancient Roar",
+                        description: "Casts wide-cone fear effect but on longer cast time.",
+                        rangedTip: "Spread out before roar. Move away from hazards while feared if possible."
+                    }
+                ]
+            },
+            // SEAT OF THE TRIUMVIRATE - 3 BOSSES (LEGACY)
             {
                 dungeon: "Seat of the Triumvirate",
                 boss: "Zuraal the Ascended",
@@ -563,18 +689,13 @@
                 mechanics: [
                     {
                         name: "Void Eruption",
-                        description: "Conal AoE in front of boss, large damage zone.",
-                        rangedTip: "Position behind or to the side of boss. Never stand in front during cast."
+                        description: "Conal AoE in front of boss with massive damage and knockback.",
+                        rangedTip: "Position behind or to the side. Never stand in front quarter during cast."
                     },
                     {
                         name: "Twilight Nexus",
-                        description: "Debuff that creates traveling void zones following the player.",
-                        rangedTip: "Run in wide circles away from group. Don't lead zones toward healer or distant players."
-                    },
-                    {
-                        name: "Portal Summon",
-                        description: "Spawns adds that must be prioritized. Group must quickly switch targets.",
-                        rangedTip: "Have quick targeting ready. Use markers to identify priority adds. Switch efficiently."
+                        description: "Debuff creates ground hazard that follows player around.",
+                        rangedTip: "Kite in wide circles away from group. Don't lead hazard toward healer."
                     }
                 ]
             },
@@ -584,14 +705,14 @@
                 difficulty: "medium",
                 mechanics: [
                     {
-                        name: "Debilitating Hex",
-                        description: "Single target debuff reducing healing received.",
-                        rangedTip: "Communicate to healer if you receive this. Plan cooldn around reduced healing."
+                        name: "Void Lane",
+                        description: "Linear void beam crosses arena multiple times.",
+                        rangedTip: "Move perpendicular to beam path. Anticipate next beam direction."
                     },
                     {
-                        name: "Void Lane",
-                        description: "Linear AoE attack across arena.",
-                        rangedTip: "Maintain situational awareness. Move perpendicular to approaching lanes."
+                        name: "Debilitating Hex",
+                        description: "Reduces healing received on targeted player for duration.",
+                        rangedTip: "Communicate hex targets. Plan cooldowns around reduced healing windows."
                     }
                 ]
             },
@@ -602,16 +723,17 @@
                 mechanics: [
                     {
                         name: "Composite Authority",
-                        description: "Multiple bosses with independent abilities. Requires multi-phase coordination.",
-                        rangedTip: "Assign cleave targets early. Don't tunnel one target; help group with damage spread."
+                        description: "Three bosses with independent mechanics requiring split focus.",
+                        rangedTip: "Assign priority targets. Cleave when safe but don't lose focus on mechanics."
                     },
                     {
                         name: "Cascading Power",
-                        description: "Each boss gains stacking buffs as fight progresses.",
-                        rangedTip: "Understand DPS priority rotation. Focus on highest priority target based on buff count."
+                        description: "Each boss buffs others with stacking damage increase over time.",
+                        rangedTip: "Prioritize boss with fewest stacks. Burst phases when stack count low."
                     }
                 ]
             },
+            // PIT OF SARON - 3 BOSSES (LEGACY)
             {
                 dungeon: "Pit of Saron",
                 boss: "Forgemistress Garona",
@@ -619,13 +741,13 @@
                 mechanics: [
                     {
                         name: "Flame Jet",
-                        description: "Directional fire stream from boss.",
-                        rangedTip: "Move to safe angles. Don't stand directly in front or back of boss during cast."
+                        description: "Directional fire stream from boss sweeping across area.",
+                        rangedTip: "Move perpendicular to jet direction. Position at safest angles."
                     },
                     {
                         name: "Magma Pool",
-                        description: "Spawns lava zones that damage standing in them.",
-                        rangedTip: "Track pool count. Ensure you have escape routes available."
+                        description: "Summons lava zones that persist and damage standing in them.",
+                        rangedTip: "Track pool count and positions. Ensure clear escape routes available."
                     }
                 ]
             },
@@ -635,19 +757,14 @@
                 difficulty: "high",
                 mechanics: [
                     {
-                        name: "Rending Bite",
-                        description: "Strong attack on current target creating stacking bleed.",
-                        rangedTip: "Not a threat to ranged. Range safety is your advantage here."
+                        name: "Leap Attack",
+                        description: "Boss jumps to random ranged target location with devastating strike.",
+                        rangedTip: "Spread out and move in predetermined directions when jumped. Stay mobile post-impact."
                     },
                     {
                         name: "Primal Shout",
-                        description: "AoE fear effect that affects entire group.",
-                        rangedTip: "Pre-position away from edges/hazards. Fear can cause wipes if you run into dangers."
-                    },
-                    {
-                        name: "Leap Attack",
-                        description: "Boss jumps to random ranged player location.",
-                        rangedTip: "Be spread out. When targeted, run in predetermined direction. Keep moving post-leap."
+                        description: "AoE fear effect across entire arena.",
+                        rangedTip: "Pre-position away from edges and hazards. Plan movement while feared."
                     }
                 ]
             },
@@ -658,16 +775,17 @@
                 mechanics: [
                     {
                         name: "Whip Strike",
-                        description: "Melee attack with moderate damage.",
-                        rangedTip: "Stand at range. Positioning mechanic is minimal here."
+                        description: "Melee-range attack on current target.",
+                        rangedTip: "Maintain 20+ yards distance. Standard positioning applies."
                     },
                     {
                         name: "Empowerment Aura",
-                        description: "Boss buffs adds with temporary strength boost.",
-                        rangedTip: "Help burn empowered adds quickly. Coordinate burst with group."
+                        description: "Buffs adds with increased damage.",
+                        rangedTip: "Burn empowered adds quickly. Coordinate burst with group."
                     }
                 ]
             },
+            // ALGETH'AR ACADEMY - 3 BOSSES (LEGACY)
             {
                 dungeon: "Algeth'ar Academy",
                 boss: "Headmaster Tharrisa",
@@ -676,12 +794,12 @@
                     {
                         name: "Arcane Amplification",
                         description: "Group-wide debuff increasing magic damage taken.",
-                        rangedTip: "Stack slightly closer than normal for healing efficiency when this is active."
+                        rangedTip: "Stack closer than normal for healer efficiency during this phase."
                     },
                     {
                         name: "Spellburst",
-                        description: "Casted ability that damages random players.",
-                        rangedTip: "Spread out to minimize multi-target hits. Even spread positioning is ideal."
+                        description: "Random player spell detonation dealing area damage.",
+                        rangedTip: "Spread out to minimize multi-target hits. Even spacing optimal."
                     }
                 ]
             },
@@ -692,115 +810,82 @@
                 mechanics: [
                     {
                         name: "Ascendant Form",
-                        description: "Boss enters powered state requiring special strategy to damage.",
-                        rangedTip: "Understand phase mechanic beforehand. Coordinate raid CDs for burn phases."
+                        description: "Boss enters powered state with enhanced damage and mechanics.",
+                        rangedTip: "Identify phase transition beforehand. Coordinate cooldown usage for burst."
                     },
                     {
                         name: "Seeping Void",
-                        description: "Ground AoE zones that persist and spread.",
-                        rangedTip: "Create clean zones for group. Predict spread pattern and move ahead of it."
+                        description: "Ground zones persist and slowly spread across arena.",
+                        rangedTip: "Create clean zones for group. Predict spread pattern and move ahead."
                     }
                 ]
             },
             {
-                dungeon: "Skyreach",
-                boss: "Chirp Master Orendil",
-                difficulty: "low",
-                mechanics: [
-                    {
-                        name: "Bird Strike",
-                        description: "Attack with minor damage.",
-                        rangedTip: "Straightforward encounter. Focus on positioning for AoE avoidance."
-                    },
-                    {
-                        name: "Feather Volley",
-                        description: "Weak AoE around boss.",
-                        rangedTip: "Keep standard range. Minimal positioning challenge."
-                    }
-                ]
-            },
-            {
-                dungeon: "Skyreach",
-                boss: "Wind Master Sentrak",
+                dungeon: "Algeth'ar Academy",
+                boss: "Archmagus Thelis",
                 difficulty: "medium",
                 mechanics: [
                     {
-                        name: "Gust of Wind",
-                        description: "Knockback effect that can push into hazards.",
-                        rangedTip: "Position away from edges before cast. Use range to recover from knockback."
+                        name: "Arcane Barrage",
+                        description: "Rapid arcane projectiles at multiple targets.",
+                        rangedTip: "Keep moving to dodge projectiles. Create circular movement pattern around room."
+                    },
+                    {
+                        name: "Dimensional Fracture",
+                        description: "Creates rift that separates party into zones.",
+                        rangedTip: "Quickly identify which group you're in. Maintain awareness of mechanics in your zone."
+                    }
+                ]
+            },
+            // SKYREACH - 3 BOSSES (LEGACY)
+            {
+                dungeon: "Skyreach",
+                boss: "High Sage Viryx",
+                difficulty: "medium",
+                mechanics: [
+                    {
+                        name: "Wind Gust",
+                        description: "Knockback effect that pushes players away from center.",
+                        rangedTip: "Position near pillars for recovery. Use knockback cooldowns strategically."
                     },
                     {
                         name: "Air Current",
-                        description: "Moving area that affects group positioning.",
-                        rangedTip: "Pre-position before mechanics. Anticipate patterns."
+                        description: "Moving area effect affecting positioning throughout arena.",
+                        rangedTip: "Pre-position before mechanics. Predict current direction and movement."
                     }
                 ]
             },
             {
-                dungeon: "Maisara Caverns",
-                boss: "Glinting Serpent",
-                difficulty: "low",
-                mechanics: [
-                    {
-                        name: "Coil Strike",
-                        description: "Melee-range attack.",
-                        rangedTip: "Maintain distance. Standard positioning applies."
-                    }
-                ]
-            },
-            {
-                dungeon: "Maisara Caverns",
-                boss: "Scaled Guardian",
-                difficulty: "medium",
-                mechanics: [
-                    {
-                        name: "Petrifying Gaze",
-                        description: "Stun effect if looking at boss during cast.",
-                        rangedTip: "Turn away during casts. Communicate stun timing to group for coordination."
-                    },
-                    {
-                        name: "Tail Pound",
-                        description: "AoE around back of boss.",
-                        rangedTip: "Position frontally. Don't stand behind boss during cast animation."
-                    }
-                ]
-            },
-            {
-                dungeon: "Magisters' Terrace",
-                boss: "Magister Raelyn",
-                difficulty: "medium",
-                mechanics: [
-                    {
-                        name: "Magical Missile",
-                        description: "Projectile attack at random target.",
-                        rangedTip: "Keep moving to dodge. Can't be LoSed completely so maintain awareness."
-                    },
-                    {
-                        name: "Spell Ward",
-                        description: "Shields boss from magic effects.",
-                        rangedTip: "Switch to physical if available or maintain damage through shield."
-                    }
-                ]
-            },
-            {
-                dungeon: "Magisters' Terrace",
-                boss: "Selandria",
+                dungeon: "Skyreach",
+                boss: "Avariss the Unbound",
                 difficulty: "high",
                 mechanics: [
                     {
-                        name: "Frost Bolt",
-                        description: "Chained spell that bounces between nearby players causing slows.",
-                        rangedTip: "Spread out to prevent bounces. Position at maximum range from group."
+                        name: "Skyward Slam",
+                        description: "Boss jumps to arena center and creates explosive shockwave.",
+                        rangedTip: "Run away immediately. Maintain distance throughout duration."
                     },
                     {
-                        name: "Icy Vengeance",
-                        description: "Retaliatory spell when boss takes burst damage.",
-                        rangedTip: "Don't force burst phases. Coordinate steady damage to avoid icy pushback."
+                        name: "Elemental Storm",
+                        description: "Random AoE tempests spawn across arena.",
+                        rangedTip: "Navigate between storms. Don't get caught in overlapping patterns."
+                    }
+                ]
+            },
+            {
+                dungeon: "Skyreach",
+                boss: "Rukhran",
+                difficulty: "medium",
+                mechanics: [
+                    {
+                        name: "Piercing Shriek",
+                        description: "Sonic attack that disorients ranged players briefly.",
+                        rangedTip: "Pre-position in safe zones before cast. Move away from hazards while disoriented if possible."
                     },
                     {
-                        name: "Blizzard",
-                        description: "Group-wide AoE that fills entire room with hazard.",
-                        rangedTip: "Pre-position in safe zones before cast. Can't escape mid-AoE once cast starts."
+                        name: "Wing Buffet",
+                        description: "AoE knockback around boss.",
+                        rangedTip: "Maintain distance to recover from knockback quickly. Don't stack too close to boss."
                     }
                 ]
             }
