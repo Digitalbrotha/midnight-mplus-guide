@@ -365,7 +365,7 @@
             </div>
 
             <!-- 5. Knockback Management -->
-            <div class="mechanic-box" data-bosses="Kasreth,Void Nova,Kallimorph,Avariss the Unbound,Muro'jin">
+            <div class="mechanic-box" data-bosses="Kasreth,Avariss the Unbound,Muro'jin">
                 <div class="mechanic-title">Void Nova & Knockbacks</div>
                 <div class="mechanic-description">
                     Around-the-boss AoE with knockback. Ranged recover faster due to distance. Position near walls if possible.
@@ -424,7 +424,7 @@
             </div>
 
             <!-- 8. Blizzard Room Coverage -->
-            <div class="mechanic-box" data-bosses="Selandria"
+            <div class="mechanic-box" data-bosses="Selandria">
                 <div class="mechanic-title">Blizzard (Selandria) - Pre-Positioning</div>
                 <div class="mechanic-description">
                     Room fills with AoE hazard. Must pre-position in safe zones before cast starts. Can't escape once started.
@@ -1126,29 +1126,34 @@
         drawStackVsSpread();
         drawRangedPosition();
 
+        // Boss Database with Dungeons
+        const bossDatabase = [
+            { name: 'Ascendant Lord Orifex', dungeon: 'Nexus-Point Xenas' },
+            { name: 'Emberdawn', dungeon: 'Windrunner Spire' },
+            { name: 'Restless Heart', dungeon: 'Windrunner Spire' },
+            { name: 'Headmaster Tharrisa', dungeon: 'Algeth\'ar Academy' },
+            { name: 'Arcanotron Custos', dungeon: 'Magisters\' Terrace' },
+            { name: 'Kalis', dungeon: 'Windrunner Spire' },
+            { name: 'Degentrius', dungeon: 'Magisters\' Terrace' },
+            { name: 'Veras the Ascendant', dungeon: 'Algeth\'ar Academy' },
+            { name: 'Kasreth', dungeon: 'Nexus-Point Xenas' },
+            { name: 'Muro\'jin', dungeon: 'Maisara Caverns' },
+            { name: 'Avariss the Unbound', dungeon: 'Skyreach' },
+            { name: 'Cruelfang', dungeon: 'Pit of Saron' },
+            { name: 'Commander Kroluk', dungeon: 'Windrunner Spire' },
+            { name: 'Selandria', dungeon: 'Magisters\' Terrace' },
+            { name: 'Vordaza', dungeon: 'Maisara Caverns' }
+        ];
+
         // Initialize boss filter
         function initializeFilters() {
             const bossFilter = document.getElementById('bossFilter');
-            const allBoxes = document.querySelectorAll('[data-bosses]');
-            const bosses = new Set();
 
-            // Collect all unique bosses
-            allBoxes.forEach(box => {
-                const boxBosses = box.getAttribute('data-bosses').split(',');
-                boxBosses.forEach(boss => {
-                    const cleanBoss = boss.trim();
-                    if (cleanBoss && cleanBoss !== 'Multiple Bosses' && cleanBoss !== 'All Bosses') {
-                        bosses.add(cleanBoss);
-                    }
-                });
-            });
-
-            // Sort bosses and add to dropdown
-            const sortedBosses = Array.from(bosses).sort();
-            sortedBosses.forEach(boss => {
+            // Add all bosses from database to dropdown
+            bossDatabase.forEach(boss => {
                 const option = document.createElement('option');
-                option.value = boss;
-                option.textContent = boss;
+                option.value = boss.name;
+                option.textContent = `${boss.name} (${boss.dungeon})`;
                 bossFilter.appendChild(option);
             });
 
@@ -1161,12 +1166,12 @@
             const allBoxes = document.querySelectorAll('[data-bosses]');
 
             allBoxes.forEach(box => {
-                const bosses = box.getAttribute('data-bosses').split(',').map(b => b.trim());
+                const boxBosses = box.getAttribute('data-bosses').split(',').map(b => b.trim());
                 
                 if (!selectedBoss) {
                     // Show all when no filter selected
                     box.style.display = 'block';
-                } else if (bosses.includes(selectedBoss) || bosses.includes('All Bosses')) {
+                } else if (boxBosses.includes(selectedBoss) || boxBosses.includes('All Bosses')) {
                     box.style.display = 'block';
                 } else {
                     box.style.display = 'none';
