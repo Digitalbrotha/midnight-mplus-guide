@@ -4,7 +4,6 @@
   "framework": "other",
   "outputDirectory": ".",
   "public": true,
-  "directoryListing": false,
   "rewrites": [
     {
       "source": "/",
