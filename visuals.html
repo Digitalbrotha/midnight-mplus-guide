@@ -39,6 +39,65 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
         }
 
+        .filter-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255,193,7,0.3);
+            margin-top: 20px;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            color: #ffc107;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-size: 0.9em;
+        }
+
+        select {
+            padding: 12px;
+            background: #0f3460;
+            color: #e0e0e0;
+            border: 2px solid #ffc107;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        select:hover,
+        select:focus {
+            background: #1a4d7a;
+            box-shadow: 0 0 10px rgba(255,193,7,0.5);
+            outline: none;
+        }
+
+        .reset-btn {
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            align-self: flex-end;
+            margin-top: 20px;
+        }
+
+        .reset-btn:hover {
+            background: #c0392b;
+        }
+
         .nav-link {
             display: inline-block;
             margin-top: 20px;
@@ -202,11 +261,21 @@
                 <a href="cheatsheet.html" style="padding: 8px 15px; background: #27ae60; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 0.9em; transition: all 0.3s ease;" onmouseover="this.style.background='#229954'" onmouseout="this.style.background='#27ae60'">🗂️ Cheat Sheet</a>
                 <a href="README.md" style="padding: 8px 15px; background: #9c27b0; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 0.9em; transition: all 0.3s ease;" onmouseover="this.style.background='#7b1fa2'" onmouseout="this.style.background='#9c27b0'">📖 Guide Info</a>
             </div>
+
+            <div class="filter-controls">
+                <div class="control-group">
+                    <label for="bossFilter">Filter by Boss</label>
+                    <select id="bossFilter">
+                        <option value="">All Bosses</option>
+                    </select>
+                </div>
+                <button class="reset-btn" onclick="resetFilters()">Reset Filters</button>
+            </div>
         </header>
 
-        <div class="mechanics-grid">
+        <div class="mechanics-grid" id="mechanicsGrid">
             <!-- 1. Counter-Intuitive Light Beam -->
-            <div class="mechanic-box critical-mechanic">
+            <div class="mechanic-box critical-mechanic" data-bosses="Ascendant Lord Orifex">
                 <div class="critical-badge">⚠️ MOST COMMON MISTAKE</div>
                 <div class="mechanic-title">Ascendant Lord - Luminous Beam</div>
                 <div class="mechanic-description">
@@ -226,7 +295,7 @@
             </div>
 
             <!-- 2. Spread for Debuffs -->
-            <div class="mechanic-box">
+            <div class="mechanic-box" data-bosses="Emberdawn,Restless Heart,Headmaster Tharrisa,Arcanotron Custos">
                 <div class="mechanic-title">Static Charge (Windrunner Spire)</div>
                 <div class="mechanic-description">
                     Debuff jumps between nearby players. Maintain 8+ yards from all group members.
@@ -252,7 +321,7 @@
             </div>
 
             <!-- 3. Feather Storm Kiting -->
-            <div class="mechanic-box">
+            <div class="mechanic-box" data-bosses="Emberdawn,Kalis">
                 <div class="mechanic-title">Feather Storm (Windrunner Spire)</div>
                 <div class="mechanic-description">
                     Ground AoE that travels across room. Maintain DPS while continuously moving. Stutter-step to keep uptime.
@@ -270,7 +339,7 @@
             </div>
 
             <!-- 4. Multi-Zone Splitting -->
-            <div class="mechanic-box">
+            <div class="mechanic-box" data-bosses="Degentrius,Veras the Ascendant">
                 <div class="mechanic-title">Inferno (Ambassador Flamelash)</div>
                 <div class="mechanic-description">
                     Room splits into safe zones. Group must split efficiently. Know your assigned zone beforehand.
@@ -296,7 +365,7 @@
             </div>
 
             <!-- 5. Knockback Management -->
-            <div class="mechanic-box">
+            <div class="mechanic-box" data-bosses="Kasreth,Void Nova,Kallimorph,Avariss the Unbound,Muro'jin">
                 <div class="mechanic-title">Void Nova & Knockbacks</div>
                 <div class="mechanic-description">
                     Around-the-boss AoE with knockback. Ranged recover faster due to distance. Position near walls if possible.
@@ -314,7 +383,7 @@
             </div>
 
             <!-- 6. Leap Attack -->
-            <div class="mechanic-box">
+            <div class="mechanic-box" data-bosses="Cruelfang,Commander Kroluk">
                 <div class="mechanic-title">Leap Attack (Cruelfang)</div>
                 <div class="mechanic-description">
                     Boss jumps to random ranged player. Spread out. When targeted, run in predetermined direction.
@@ -332,7 +401,7 @@
             </div>
 
             <!-- 7. Frost Bolt Bouncing -->
-            <div class="mechanic-box critical-mechanic">
+            <div class="mechanic-box critical-mechanic" data-bosses="Selandria,Vordaza">
                 <div class="critical-badge">⚠️ POSITIONING CRITICAL</div>
                 <div class="mechanic-title">Frost Bolt (Selandria)</div>
                 <div class="mechanic-description">
@@ -355,7 +424,7 @@
             </div>
 
             <!-- 8. Blizzard Room Coverage -->
-            <div class="mechanic-box">
+            <div class="mechanic-box" data-bosses="Selandria"
                 <div class="mechanic-title">Blizzard (Selandria) - Pre-Positioning</div>
                 <div class="mechanic-description">
                     Room fills with AoE hazard. Must pre-position in safe zones before cast starts. Can't escape once started.
@@ -373,7 +442,7 @@
             </div>
 
             <!-- 9. Stacking vs Spreading -->
-            <div class="mechanic-box">
+            <div class="mechanic-box" data-bosses="Multiple Bosses">
                 <div class="mechanic-title">Understanding Stack vs Spread</div>
                 <div class="mechanic-description">
                     Key tactical decision: When to stack for healing vs. when to spread for mechanic avoidance.
@@ -395,7 +464,7 @@
             </div>
 
             <!-- 10. Ranged Positioning Zone -->
-            <div class="mechanic-box">
+            <div class="mechanic-box" data-bosses="All Bosses">
                 <div class="mechanic-title">Optimal Ranged DPS Positioning</div>
                 <div class="mechanic-description">
                     Safe zones that maximize DPS uptime while avoiding most mechanics. Adjust based on specific encounter.
@@ -1056,6 +1125,62 @@
         drawBlizzardZones();
         drawStackVsSpread();
         drawRangedPosition();
+
+        // Initialize boss filter
+        function initializeFilters() {
+            const bossFilter = document.getElementById('bossFilter');
+            const allBoxes = document.querySelectorAll('[data-bosses]');
+            const bosses = new Set();
+
+            // Collect all unique bosses
+            allBoxes.forEach(box => {
+                const boxBosses = box.getAttribute('data-bosses').split(',');
+                boxBosses.forEach(boss => {
+                    const cleanBoss = boss.trim();
+                    if (cleanBoss && cleanBoss !== 'Multiple Bosses' && cleanBoss !== 'All Bosses') {
+                        bosses.add(cleanBoss);
+                    }
+                });
+            });
+
+            // Sort bosses and add to dropdown
+            const sortedBosses = Array.from(bosses).sort();
+            sortedBosses.forEach(boss => {
+                const option = document.createElement('option');
+                option.value = boss;
+                option.textContent = boss;
+                bossFilter.appendChild(option);
+            });
+
+            // Add event listener for filtering
+            bossFilter.addEventListener('change', filterByBoss);
+        }
+
+        function filterByBoss() {
+            const selectedBoss = document.getElementById('bossFilter').value;
+            const allBoxes = document.querySelectorAll('[data-bosses]');
+
+            allBoxes.forEach(box => {
+                const bosses = box.getAttribute('data-bosses').split(',').map(b => b.trim());
+                
+                if (!selectedBoss) {
+                    // Show all when no filter selected
+                    box.style.display = 'block';
+                } else if (bosses.includes(selectedBoss) || bosses.includes('All Bosses')) {
+                    box.style.display = 'block';
+                } else {
+                    box.style.display = 'none';
+                }
+            });
+        }
+
+        function resetFilters() {
+            document.getElementById('bossFilter').value = '';
+            filterByBoss();
+        }
+
+        // Initialize on load
+        initializeFilters();
     </script>
 </body>
 </html>
